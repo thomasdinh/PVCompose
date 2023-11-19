@@ -5,10 +5,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 
 
-@Composable
-fun Navigation(){
-    val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "home"){
-
-    }
+object Navigation {
+    const val HOME = "home"
+    const val SCAN_SCREEN = "scanscreen"
+    const val SETTINGS = "settings"
 }

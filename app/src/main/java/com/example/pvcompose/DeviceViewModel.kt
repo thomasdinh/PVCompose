@@ -30,8 +30,6 @@ class DeviceViewModel : ViewModel() {
 
 
 
-
-
     companion object {
     }
 }

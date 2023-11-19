@@ -5,10 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -27,16 +25,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun HomeScreen(){
-    GridContent()
-}
 
 @Composable
-fun GridContent(){
+fun HomeScreen(navController: NavHostController){
     Box(
         modifier = Modifier.fillMaxSize()
             .padding(20.dp),
@@ -69,7 +62,7 @@ fun GridContent(){
                             contentDescription = item.contentDescription,
                             modifier = Modifier.size(120.dp)
                                 .clickable {
-                                    
+                                    navController.navigate(item.route)
                                 }
                         )
                         Text(text = item.title,
@@ -91,52 +84,59 @@ fun GridContent(){
 data class homeScreenItems(
     val icon : Int,
     val title: String,
-    val contentDescription : String
+    val contentDescription : String,
+    val route : String
 )
-
 fun createHomeScreenItems(): List<homeScreenItems> {
     return listOf<homeScreenItems>(
         homeScreenItems(
-           //https://www.flaticon.com/free-icon/business-report_3094851?term=report&page=1&position=8&origin=search&related_id=3094851
+            //https://www.flaticon.com/free-icon/business-report_3094851?term=report&page=1&position=8&origin=search&related_id=3094851
             icon = R.drawable.report_icon_home ,
             title = "Report",
-            contentDescription = "See here a evaluation of the found devices!"
+            contentDescription = "See here a evaluation of the found devices!",
+            route = "report"
         ),
         homeScreenItems(
             //https://www.flaticon.com/free-icon/cloud_4826371?term=iot&page=1&position=39&origin=search&related_id=4826371
             icon = R.drawable.survey_icon ,
             title = "Scan Devices",
-            contentDescription = "A list about found devices in your network!"
+            contentDescription = "A list about found devices in your network!",
+            route = "scanscreen"
         ),
         homeScreenItems(
             //https://www.flaticon.com/free-icon/call-center_2706988?term=survey&page=1&position=9&origin=search&related_id=2706988
             icon = R.drawable.survey_icon ,
             title = "Survey",
-            contentDescription = "A questionnaire about our product!"
+            contentDescription = "A questionnaire about our product!",
+            route = "survey_screen"
         ),
         homeScreenItems(
             //https://www.flaticon.com/free-icon/gear_484613?term=setting&page=1&position=10&origin=search&related_id=484613
             icon = R.drawable.settings_icon,
             title = "Settings",
-            contentDescription = "Change your preferences here!"
+            contentDescription = "Change your preferences here!",
+            route = "settings"
         ),
         homeScreenItems(
             //https://www.flaticon.com/free-icon/user_4803103?term=about+us&page=1&position=20&origin=search&related_id=4803103
             icon = R.drawable.about_us_icon,
             title = "About us",
-            contentDescription = "Find more about us!"
+            contentDescription = "Find more about us!",
+            route = "about_us"
         ),
         homeScreenItems(
             //https://www.flaticon.com/free-icon/exit-to-app-button_61208?term=close+app&page=1&position=7&origin=search&related_id=61208
             icon = R.drawable.exit_to_app_icon,
             title = "Close App",
-            contentDescription = "Close the app."
+            contentDescription = "Close the app.",
+            route = "exit"
         )
     )
 }
 
+
 @Composable
 //@Preview(showBackground = true)
 fun HomeScreenPreview(){
-    HomeScreen()
+
 }
