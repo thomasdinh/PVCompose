@@ -90,6 +90,11 @@ class MainActivity : ComponentActivity() {
                     permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 }
 
+                val subnet = "192.168.1" // Replace with your subnet
+                val startIP = 1
+                val endIP = 254
+                pingSweep(subnet, startIP, endIP)
+
 
                 //-----------Navigation-------------------------------------------------------------
                 val navItems = createNavigationItems()
@@ -153,6 +158,7 @@ class MainActivity : ComponentActivity() {
                                 composable(Navigation.HOME) { HomeScreen(navController = navController) }
                                 composable(Navigation.SCAN_SCREEN) { ScanScreen(deviceViewModel = deviceViewModel) }
                                 composable(Navigation.SETTINGS) { SettingsScreen()}
+                                composable(Navigation.SURVEY){ SurveyScreen()}
 
                             }
                             navController.navigate("home")

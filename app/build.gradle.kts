@@ -3,7 +3,7 @@ import org.apache.tools.ant.util.JavaEnvUtils.VERSION_1_8
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    
+    id("com.chaquo.python")
 }
 
 android {
@@ -16,10 +16,6 @@ android {
         applicationId = "com.example.pvcompose"
         minSdk = 26
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
-
-
 
 
 
@@ -82,6 +78,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.1")
     implementation("androidx.navigation:navigation-compose:2.7.4")
     implementation("androidx.activity:activity-ktx:1.8.0")
+
 
 
     testImplementation("junit:junit:4.13.2")

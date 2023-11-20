@@ -9,4 +9,5 @@ object Navigation {
     const val HOME = "home"
     const val SCAN_SCREEN = "scanscreen"
     const val SETTINGS = "settings"
+    const val SURVEY = "survey_screen"
 }
