@@ -90,10 +90,6 @@ class MainActivity : ComponentActivity() {
                     permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
                 }
 
-                val subnet = "192.168.1" // Replace with your subnet
-                val startIP = 1
-                val endIP = 254
-                pingSweep(subnet, startIP, endIP)
 
 
                 //-----------Navigation-------------------------------------------------------------
@@ -197,13 +193,20 @@ fun createNavigationItems(): List<NavigationItem> {
             selectedIcon = Icons.Filled.Warning,
             unselectedIcon = Icons.Outlined.Warning,
             route = "scanscreen",
-            hasNews = true
+            hasNews = false
         ),
         NavigationItem(
             title = "Settings",
             selectedIcon = Icons.Filled.Settings,
             unselectedIcon = Icons.Outlined.Settings,
             route = "settings",
+            hasNews = false
+        ),
+        NavigationItem(
+            title = "Survey",
+            selectedIcon = Icons.Filled.Settings,
+            unselectedIcon = Icons.Outlined.Settings,
+            route = "survey_screen",
             hasNews = false
         )
         // Add more NavigationItem objects as needed
@@ -212,7 +215,7 @@ fun createNavigationItems(): List<NavigationItem> {
 
 
 
-@Preview(showBackground = true)
+
 @Composable
 fun GreetingPreview() {
     PVComposeTheme {

@@ -10,4 +10,5 @@ object Navigation {
     const val SCAN_SCREEN = "scanscreen"
     const val SETTINGS = "settings"
     const val SURVEY = "survey_screen"
+    const val REPORT = "report_screen"
 }

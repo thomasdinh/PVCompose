@@ -42,7 +42,13 @@ fun ScanScreen(deviceViewModel: DeviceViewModel) {
         Device(1,"asd","asd","asd","asd"),
         Device(12,"123asd","a213sd","a22sd","a123sd")
     )
-    deviceViewModel.setDevices(deviceList)
+
+
+    if (deviceViewModel.isEmpty()){
+        deviceViewModel.setDevices(deviceList)
+    }
+
+
     deviceListScreen(deviceViewModel)
 
     Spacer(modifier = Modifier.height(4.dp))
@@ -154,6 +160,7 @@ fun deviceListScreen(
                     }
                     logData("Edit Device","Button Click")
                     viewModel.setDevices(updatedDeviceList)
+                    println(viewModel.devices)
                     isDialogVisible = false
                     editedDeviceIndex = -1
                 }) {

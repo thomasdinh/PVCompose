@@ -16,6 +16,10 @@ class DeviceViewModel : ViewModel() {
         _devices.value = newDevices
     }
 
+    fun isEmpty(): Boolean {
+        return _devices.value.isNullOrEmpty()
+    }
+
     fun clear(){
         _devices.value = emptyList()
     }
