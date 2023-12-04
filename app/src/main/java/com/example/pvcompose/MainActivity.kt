@@ -155,6 +155,7 @@ class MainActivity : ComponentActivity() {
                                 composable(Navigation.SCAN_SCREEN) { ScanScreen(deviceViewModel = deviceViewModel) }
                                 composable(Navigation.SETTINGS) { SettingsScreen()}
                                 composable(Navigation.SURVEY){ SurveyScreen()}
+                                composable(Navigation.REPORT){ ReportScreen()}
 
                             }
                             navController.navigate("home")

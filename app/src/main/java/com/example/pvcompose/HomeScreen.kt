@@ -94,11 +94,11 @@ fun createHomeScreenItems(): List<homeScreenItems> {
             icon = R.drawable.report_icon_home ,
             title = "Report",
             contentDescription = "See here a evaluation of the found devices!",
-            route = "report"
+            route = "report_screen"
         ),
         homeScreenItems(
             //https://www.flaticon.com/free-icon/cloud_4826371?term=iot&page=1&position=39&origin=search&related_id=4826371
-            icon = R.drawable.survey_icon ,
+            icon = R.drawable.scan_icon ,
             title = "Scan Devices",
             contentDescription = "A list about found devices in your network!",
             route = "scanscreen"
