@@ -7,6 +7,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +19,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -32,6 +39,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -49,91 +57,94 @@ import androidx.compose.ui.graphics.rotate
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import kotlinx.coroutines.launch
 import java.lang.Math.cos
 import java.lang.Math.sin
 
 @Composable
-fun SettingsScreen() {
-    var sliderValue by remember { mutableStateOf(50f) }
-    val toggleCardList = listOf<toggleCardsDescription>(
-        toggleCardsDescription( "Video Information",R.drawable.video_camera_icon,"50 , Color.Red"),
-        toggleCardsDescription( "Sound Information",R.drawable.sound_icon,"70 , orange"),
-        toggleCardsDescription( "Biometric Information",R.drawable.biometric_icon,"10 , lightGreen"),
-        toggleCardsDescription( "GPS Information",R.drawable.location_icon,"30 , darkYellow"),
-        toggleCardsDescription( "Online Information",R.drawable.master_data,"90 , darkRed"),
-        toggleCardsDescription( "Motion Information",R.drawable.motion_sensor,"60 , darkGreen")
-    )
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Settings",
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-        Slider(
-            value = sliderValue,
-            onValueChange = { sliderValue = it },
-            valueRange = 0f..100f,
-            steps = 101,
-            modifier = Modifier.fillMaxWidth()
-        )
-        Text(text = "Slider value is: ${sliderValue.toInt()}")
-        LazyColumn(){
-            items(toggleCardList){
-                toggleCard(it)
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-        }
+fun SettingsScreen(navController: NavHostController) {
+    Box(
+        modifier = Modifier.fillMaxSize()
+            .padding(20.dp),
+        contentAlignment = Alignment.Center){
 
+        Column {
+            Text(
+                text = "SETTINGS",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
 
-    }
-}
+            )
+            LazyVerticalGrid(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(35.dp),
 
-data class toggleCardsDescription(
-    val title : String,
-    val image: Int,
-    val description : String,
-
-)
-@Composable
-fun toggleCard(toggleCardsDescription : toggleCardsDescription){
-    Card {
-        Row(modifier = Modifier
-            .padding(20.dp)
-            .height(70.dp)) {
-            Column(modifier = Modifier.weight(1.5f)) {
-                Image(
-                    painter = painterResource(id = toggleCardsDescription.image),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .weight(1f)
-                        .height(60.dp)
-                )
-            }
-            Column(modifier = Modifier.weight(3f)) {
-                Text(text = toggleCardsDescription.title, style = MaterialTheme.typography.titleSmall,
-                    fontWeight = FontWeight.Bold)
-                Text(text ="There will be text added later on...", style = MaterialTheme.typography.bodyMedium)
-                
-            }
-            Column (modifier = Modifier.weight(1f)){
-                var checked by remember { mutableStateOf(true) }
-                Switch(
-                    checked = checked,
-                    onCheckedChange = {
-                        checked = it
+                verticalArrangement = Arrangement.SpaceEvenly,
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                columns = GridCells.Fixed(2)
+            ){
+                val settingItems = createSettingsScreenItems()
+                items(settingItems){ item ->
+                    Column {
+                        Image(painter = painterResource(id = item.icon),
+                            contentDescription = item.contentDescription,
+                            modifier = Modifier.size(120.dp)
+                                .clickable {
+                                    navController.navigate(item.route)
+                                }
+                        )
+                        Text(text = item.title,
+                            Modifier.width(120.dp),
+                            style = MaterialTheme.typography.titleSmall,
+                            textAlign = TextAlign.Center)
                     }
-                )
+
+                }
+
             }
         }
+
     }
+
 }
+
+fun createSettingsScreenItems(): List<homeScreenItems> {
+    return listOf<homeScreenItems>(
+        homeScreenItems(
+            //https://www.flaticon.com/free-icon/setting_11377670?term=notification+settings&page=1&position=1&origin=search&related_id=11377670
+            icon = R.drawable.notification_setting_icon ,
+            title = "Notification Settings",
+            contentDescription = "See here a evaluation of the found devices!",
+            route = "notification_screen"
+        ),
+        homeScreenItems(
+            icon = R.drawable.notification_setting_icon ,
+            title = "Notification Settings",
+            contentDescription = "See here a evaluation of the found devices!",
+            route = "notification_screen"
+        ),
+        homeScreenItems(
+            icon = R.drawable.notification_setting_icon ,
+            title = "Notification Settings",
+            contentDescription = "See here a evaluation of the found devices!",
+            route = "notification_screen"
+        )
+
+    )
+}
+
+
 
 
 

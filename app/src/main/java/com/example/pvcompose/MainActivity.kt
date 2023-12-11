@@ -153,9 +153,11 @@ class MainActivity : ComponentActivity() {
                             NavHost(navController = navController, startDestination = "home") {
                                 composable(Navigation.HOME) { HomeScreen(navController = navController) }
                                 composable(Navigation.SCAN_SCREEN) { ScanScreen(deviceViewModel = deviceViewModel) }
-                                composable(Navigation.SETTINGS) { SettingsScreen()}
+                                composable(Navigation.SETTINGS) { SettingsScreen(navController = navController)}
                                 composable(Navigation.SURVEY){ SurveyScreen()}
                                 composable(Navigation.REPORT){ ReportScreen()}
+                                composable(Navigation.NOTIFICATION_SETTING){ NotificationSettingsScreen(navController = navController)}
+                                composable(Navigation.DATATYPE_SETTING){DataTypeSettingScreen()}
 
                             }
                             navController.navigate("home")
@@ -180,39 +182,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-fun createNavigationItems(): List<NavigationItem> {
-    return listOf(
-        NavigationItem(
-            title = "Home",
-            selectedIcon = Icons.Filled.Home,
-            unselectedIcon = Icons.Outlined.Home,
-            route = "home",
-            hasNews = false
-        ),
-        NavigationItem(
-            title = "Scan",
-            selectedIcon = Icons.Filled.Warning,
-            unselectedIcon = Icons.Outlined.Warning,
-            route = "scanscreen",
-            hasNews = false
-        ),
-        NavigationItem(
-            title = "Settings",
-            selectedIcon = Icons.Filled.Settings,
-            unselectedIcon = Icons.Outlined.Settings,
-            route = "settings",
-            hasNews = false
-        ),
-        NavigationItem(
-            title = "Survey",
-            selectedIcon = Icons.Filled.Settings,
-            unselectedIcon = Icons.Outlined.Settings,
-            route = "survey_screen",
-            hasNews = false
-        )
-        // Add more NavigationItem objects as needed
-    )
-}
+
 
 
 

@@ -133,10 +133,3 @@ fun createHomeScreenItems(): List<homeScreenItems> {
         )
     )
 }
-
-
-@Composable
-//@Preview(showBackground = true)
-fun HomeScreenPreview(){
-
-}

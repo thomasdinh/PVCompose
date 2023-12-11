@@ -11,4 +11,9 @@ object Navigation {
     const val SETTINGS = "settings"
     const val SURVEY = "survey_screen"
     const val REPORT = "report_screen"
+    const val NOTIFICATION_SETTING = "notification_screen"
+    const val DATATYPE_SETTING = "datatype_screen"
 }
+
+
+
