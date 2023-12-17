@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 
 
 
-class DeviceViewModel : ViewModel() {
+class DeviceViewModel : ViewModel(
+    
+) {
     private val _devices: MutableLiveData<List<Device>> = MutableLiveData()
     val devices: LiveData<List<Device>> get() = _devices
-
-
 
     fun setDevices(newDevices: List<Device>) {
         _devices.value = newDevices
@@ -31,8 +31,6 @@ class DeviceViewModel : ViewModel() {
             _devices.value = currentDevices
         }
     }
-
-
 
     companion object {
     }

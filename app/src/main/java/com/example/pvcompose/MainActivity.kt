@@ -44,6 +44,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -59,10 +63,18 @@ data class NavigationItem(
 )
 
 class MainActivity : ComponentActivity() {
+
+
+
+    val Context.dataSettingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "data_settings")
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
+        val viewModelProviderFactory = SettingsViewModelFactory(dataSettingsDataStore)
+        val settingsViewModel = ViewModelProvider(this, viewModelProviderFactory).get(settingsViewModel::class.java)
         val deviceViewModel: DeviceViewModel by viewModels()
+
         super.onCreate(savedInstanceState)
         setContent {
             PVComposeTheme {
@@ -157,7 +169,7 @@ class MainActivity : ComponentActivity() {
                                 composable(Navigation.SURVEY){ SurveyScreen()}
                                 composable(Navigation.REPORT){ ReportScreen()}
                                 composable(Navigation.NOTIFICATION_SETTING){ NotificationSettingsScreen(navController = navController)}
-                                composable(Navigation.DATATYPE_SETTING){DataTypeSettingScreen()}
+                                composable(Navigation.DATATYPE_SETTING){DataTypeSettingScreen(settingsViewModel)}
 
                             }
                             navController.navigate("home")

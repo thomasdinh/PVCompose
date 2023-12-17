@@ -1,48 +1,54 @@
 package com.example.pvcompose
 
+import android.content.Context
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 data class toggleCardsDescription(
     val title : String,
     val image: Int,
     val description : String,
-
     )
 
 @Composable
-fun DataTypeSettingScreen(){
+fun DataTypeSettingScreen(
+    viewModel: settingsViewModel = viewModel()
+){
     var sliderValue by remember { mutableStateOf(50f) }
-    val toggleCardList = listOf<toggleCardsDescription>(
-        toggleCardsDescription( "Video Information",R.drawable.video_camera_icon,"50 , Color.Red"),
-        toggleCardsDescription( "Sound Information",R.drawable.sound_icon,"70 , orange"),
-        toggleCardsDescription( "Biometric Information",R.drawable.biometric_icon,"10 , lightGreen"),
-        toggleCardsDescription( "GPS Information",R.drawable.location_icon,"30 , darkYellow"),
-        toggleCardsDescription( "Online Information",R.drawable.master_data,"90 , darkRed"),
-        toggleCardsDescription( "Motion Information",R.drawable.motion_sensor,"60 , darkGreen")
-    )
+    val videoSwitch = viewModel.videoSwitchFlow.collectAsState(initial = true)
+    val soundSwitch = viewModel.soundSwitchFlow.collectAsState(initial = true)
+    val biometricSwitch = viewModel.biometricSwitchFlow.collectAsState(initial = true)
+    val gpsSwitch = viewModel.gpsSwitchFlow.collectAsState(initial = true)
+    val motionSwitch = viewModel.motionSwitchFlow.collectAsState(initial = true)
+    val onlineSwitch = viewModel.onlineSwitchFlow.collectAsState(initial = true)
+
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -60,10 +66,11 @@ fun DataTypeSettingScreen(){
             modifier = Modifier.fillMaxWidth()
         )
         Text(text = "Slider value is: ${sliderValue.toInt()}")
+
         LazyColumn(){
-            items(toggleCardList){
-                toggleCard(it)
-                Spacer(modifier = Modifier.height(10.dp))
+            // ADD Items here
+            item {
+               switchCard(saveBoolean = {viewModel.saveVideoSwitch(false)}, currentBoolean = videoSwitch )
             }
         }
 
@@ -72,7 +79,7 @@ fun DataTypeSettingScreen(){
 }
 
 @Composable
-fun toggleCard(toggleCardsDescription : toggleCardsDescription){
+fun toggleCard(toggleCardsDescription : toggleCardsDescription, isChecked : State<Boolean?>, context: Context, onToggle:(Boolean)-> Unit){
     Card {
         Row(modifier = Modifier
             .padding(20.dp)
@@ -93,14 +100,32 @@ fun toggleCard(toggleCardsDescription : toggleCardsDescription){
 
             }
             Column (modifier = Modifier.weight(1f)){
-                var checked by remember { mutableStateOf(true) }
+                var checked by remember { mutableStateOf(isChecked.value?: true) }
                 Switch(
                     checked = checked,
                     onCheckedChange = {
                         checked = it
+                        onToggle.invoke(it)
+
                     }
                 )
             }
         }
     }
+}
+
+@Composable
+fun switchCard(
+    saveBoolean:(Boolean) -> Unit,
+    currentBoolean : State<Boolean?>
+){
+    val isChecked = remember {
+        mutableStateOf(currentBoolean.value ?: true)
+    }
+    Switch(checked = isChecked.value,
+        onCheckedChange = { newValue ->
+            isChecked.value = newValue
+            saveBoolean.invoke(newValue)
+        }
+    )
 }
