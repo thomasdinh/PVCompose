@@ -64,8 +64,6 @@ data class NavigationItem(
 
 class MainActivity : ComponentActivity() {
 
-
-
     val Context.dataSettingsDataStore: DataStore<Preferences> by preferencesDataStore(name = "data_settings")
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {

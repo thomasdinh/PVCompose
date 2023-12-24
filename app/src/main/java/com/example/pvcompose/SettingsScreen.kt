@@ -130,9 +130,9 @@ fun createSettingsScreenItems(): List<homeScreenItems> {
         ),
         homeScreenItems(
             icon = R.drawable.notification_setting_icon ,
-            title = "Notification Settings",
+            title = "Notification Timing",
             contentDescription = "See here a evaluation of the found devices!",
-            route = "notification_screen"
+            route = "timing_screen"
         ),
         homeScreenItems(
             icon = R.drawable.notification_setting_icon ,
