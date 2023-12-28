@@ -168,6 +168,7 @@ class MainActivity : ComponentActivity() {
                                 composable(Navigation.REPORT){ ReportScreen()}
                                 composable(Navigation.NOTIFICATION_SETTING){ NotificationSettingsScreen(navController = navController)}
                                 composable(Navigation.DATATYPE_SETTING){DataTypeSettingScreen(settingsViewModel)}
+                                composable(Navigation.SOUNDHAPTICS_SETTINGS){ SoundAndHapticsSettings()}
 
                             }
                             navController.navigate("home")

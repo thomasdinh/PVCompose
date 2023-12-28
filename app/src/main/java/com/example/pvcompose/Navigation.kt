@@ -14,6 +14,7 @@ object Navigation {
     const val NOTIFICATION_SETTING = "notification_screen"
     const val DATATYPE_SETTING = "datatype_screen"
     const val TIMING_SETTINGS = "timing_screen"
+    const val SOUNDHAPTICS_SETTINGS = "sound_haptic_screen"
 }
 
 

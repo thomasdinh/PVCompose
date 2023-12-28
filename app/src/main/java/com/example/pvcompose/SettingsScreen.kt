@@ -128,6 +128,7 @@ fun createSettingsScreenItems(): List<homeScreenItems> {
             contentDescription = "See here a evaluation of the found devices!",
             route = "notification_screen"
         ),
+        //https://www.flaticon.com/free-icon/vibrate_8034159?term=haptics&page=1&position=18&origin=search&related_id=8034159
         homeScreenItems(
             icon = R.drawable.notification_setting_icon ,
             title = "Notification Timing",
@@ -135,10 +136,10 @@ fun createSettingsScreenItems(): List<homeScreenItems> {
             route = "timing_screen"
         ),
         homeScreenItems(
-            icon = R.drawable.notification_setting_icon ,
-            title = "Notification Settings",
+            icon = R.drawable.sound_haptics_icon ,
+            title = "Sound & Settings",
             contentDescription = "See here a evaluation of the found devices!",
-            route = "notification_screen"
+            route = "sound_haptic_screen"
         )
 
     )
