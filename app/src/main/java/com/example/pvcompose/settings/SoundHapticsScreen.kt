@@ -59,12 +59,12 @@ fun SoundAndHapticsSettings() {
                     shape = RoundedCornerShape(26.dp),
                     ) {
                     Column {
-                        soundSettingsLine("Video")
-                        soundSettingsLine("Audio")
-                        soundSettingsLine("Location")
-                        soundSettingsLine("Motion")
-                        soundSettingsLine("Biometric Data")
-                        soundSettingsLine("Online Data")
+                        SoundSettingsLine("Video")
+                        SoundSettingsLine("Audio")
+                        SoundSettingsLine("Location")
+                        SoundSettingsLine("Motion")
+                        SoundSettingsLine("Biometric Data")
+                        SoundSettingsLine("Online Data")
                     }
 
                 }
@@ -85,12 +85,12 @@ fun SoundAndHapticsSettings() {
                     shape = RoundedCornerShape(16.dp),) {
 
                     Column {
-                        soundSettingsLine("Video")
-                        soundSettingsLine("Audio")
-                        soundSettingsLine("Location")
-                        soundSettingsLine("Motion")
-                        soundSettingsLine("Biometric Data")
-                        soundSettingsLine("Online Data")
+                        SoundSettingsLine("Video")
+                        SoundSettingsLine("Audio")
+                        SoundSettingsLine("Location")
+                        SoundSettingsLine("Motion")
+                        SoundSettingsLine("Biometric Data")
+                        SoundSettingsLine("Online Data")
                     }
 
                 }
@@ -101,7 +101,7 @@ fun SoundAndHapticsSettings() {
 }
 
 @Composable
-fun soundSettingsLine(settingsTitle: String) {
+fun SoundSettingsLine(settingsTitle: String) {
     // State to control the visibility of the dialog
     var showDialog by remember { mutableStateOf(false) }
 
@@ -111,7 +111,7 @@ fun soundSettingsLine(settingsTitle: String) {
     // State to track the selected option index
     var selectedOptionIndex by remember { mutableStateOf(-1) }
 
-    var soundOptions = listOf("Option 1", "Option 2", "Option 3")
+    val soundOptions = listOf("Option 1", "Option 2", "Option 3")
     Column {
         Row(
             modifier = Modifier

@@ -152,28 +152,12 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun showNotification(){
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val notification = NotificationCompat.Builder(applicationContext, "channel_id")
-            .setContentText("We have detetected some devices!")
-            .setContentTitle("PrivaSee - Scanresults")
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .build()
-        notificationManager.notify(1,notification)
-    }
+
 }
 
 
 
 
-
-
-@Composable
-fun GreetingPreview() {
-    PVComposeTheme {
-
-    }
-}
 
 
 

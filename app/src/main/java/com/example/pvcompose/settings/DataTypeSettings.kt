@@ -50,61 +50,61 @@ fun DataTypeSettingScreen(
     val motionSwitchValue by viewModel.motionSwitchFlow.collectAsState(initial = null)
 
 
-        LazyColumn(
+    LazyColumn(
             modifier = Modifier.padding(10.dp)
-        ){
-            item {
-                Text(
-                    text = "Data Settings",
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.headlineMedium
-                )
-                Spacer(modifier = Modifier.height(10.dp))
-            }
-            item {
-                SettingsSwitch(
-                    toggleCardsDescription = toggleCardList[0],
-                    value = videoSwitchValue,
-                    onCheckedChange = { isChecked -> viewModel.saveVideoSwitch(isChecked) }
-                )
-            }
-            item {
-                SettingsSwitch(
-                    toggleCardsDescription = toggleCardList[1],
-                    value = soundSwitchValue,
-                    onCheckedChange = { isChecked -> viewModel.saveSoundSwitch(isChecked) }
-                )
-            }
-            item {
-                SettingsSwitch(
-                    toggleCardsDescription = toggleCardList[2],
-                    value = biometricSwitchValue,
-                    onCheckedChange = { isChecked -> viewModel.saveBiometricSwitch(isChecked) }
-                )
-            }
-            item {
-                SettingsSwitch(
-                    toggleCardsDescription = toggleCardList[3],
-                    value = gpsSwitchValue,
-                    onCheckedChange = { isChecked -> viewModel.saveGpsSwitch(isChecked) }
-                )
-            }
-            item {
-                SettingsSwitch(
-                    toggleCardsDescription = toggleCardList[4],
-                    value = onlineSwitchValue,
-                    onCheckedChange = { isChecked -> viewModel.saveOnlineSwitch(isChecked) }
-                )
-            }
-            item {
-                SettingsSwitch(
-                    toggleCardsDescription = toggleCardList[5],
-                    value = motionSwitchValue,
-                    onCheckedChange = { isChecked -> viewModel.saveMotionSwitch(isChecked) }
-                )
-            }
+    ){
+        item {
+            Text(
+                text = "Data Settings",
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.headlineMedium
+            )
+            Spacer(modifier = Modifier.height(10.dp))
         }
+        item {
+            SettingsSwitch(
+                toggleCardsDescription = toggleCardList[0],
+                value = videoSwitchValue,
+                onCheckedChange = { isChecked -> viewModel.saveVideoSwitch(isChecked) }
+            )
+        }
+        item {
+            SettingsSwitch(
+                toggleCardsDescription = toggleCardList[1],
+                value = soundSwitchValue,
+                onCheckedChange = { isChecked -> viewModel.saveSoundSwitch(isChecked) }
+            )
+        }
+        item {
+            SettingsSwitch(
+                toggleCardsDescription = toggleCardList[2],
+                value = biometricSwitchValue,
+                onCheckedChange = { isChecked -> viewModel.saveBiometricSwitch(isChecked) }
+            )
+        }
+        item {
+            SettingsSwitch(
+                toggleCardsDescription = toggleCardList[3],
+                value = gpsSwitchValue,
+                onCheckedChange = { isChecked -> viewModel.saveGpsSwitch(isChecked) }
+            )
+        }
+        item {
+            SettingsSwitch(
+                toggleCardsDescription = toggleCardList[4],
+                value = onlineSwitchValue,
+                onCheckedChange = { isChecked -> viewModel.saveOnlineSwitch(isChecked) }
+            )
+        }
+        item {
+            SettingsSwitch(
+                toggleCardsDescription = toggleCardList[5],
+                value = motionSwitchValue,
+                onCheckedChange = { isChecked -> viewModel.saveMotionSwitch(isChecked) }
+            )
+        }
+    }
 
 
 }
