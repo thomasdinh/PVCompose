@@ -1,4 +1,4 @@
-package com.example.pvcompose
+package com.example.pvcompose.device
 
 data class Device(
     val id: Int, // Unique identifier for the device

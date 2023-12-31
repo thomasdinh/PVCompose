@@ -1,9 +1,8 @@
-package com.example.pvcompose
+package com.example.pvcompose.device
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-
 
 
 class DeviceViewModel : ViewModel(

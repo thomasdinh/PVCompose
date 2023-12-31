@@ -1,7 +1,6 @@
-package com.example.pvcompose
+package com.example.pvcompose.screens
 
 import android.util.Log
-import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -32,7 +31,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.pvcompose.DeviceViewModel
+import com.example.pvcompose.R
+import com.example.pvcompose.device.Device
+import com.example.pvcompose.device.DeviceViewModel
 
 
 @Composable

@@ -1,4 +1,4 @@
-package com.example.pvcompose
+package com.example.pvcompose.data
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -8,6 +8,9 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.ui.graphics.Color
+import com.example.pvcompose.NavigationItem
+import com.example.pvcompose.R
+import com.example.pvcompose.settings.toggleCardsDescription
 
 
 // Colors
@@ -79,10 +82,10 @@ fun createNavigationItems(): List<NavigationItem> {
 
 //Data Settings
 val toggleCardList = listOf<toggleCardsDescription>(
-    toggleCardsDescription( "Video Information",R.drawable.video_camera_icon,"50 , Color.Red"),
-    toggleCardsDescription( "Sound Information",R.drawable.sound_icon,"70 , orange"),
-    toggleCardsDescription( "Biometric Information",R.drawable.biometric_icon,"10 , lightGreen"),
-    toggleCardsDescription( "GPS Information",R.drawable.location_icon,"30 , darkYellow"),
-    toggleCardsDescription( "Online Information",R.drawable.master_data,"90 , darkRed"),
-    toggleCardsDescription( "Motion Information",R.drawable.motion_sensor,"60 , darkGreen")
+    toggleCardsDescription( "Video Information", R.drawable.video_camera_icon,"50 , Color.Red"),
+    toggleCardsDescription( "Sound Information", R.drawable.sound_icon,"70 , orange"),
+    toggleCardsDescription( "Biometric Information", R.drawable.biometric_icon,"10 , lightGreen"),
+    toggleCardsDescription( "GPS Information", R.drawable.location_icon,"30 , darkYellow"),
+    toggleCardsDescription( "Online Information", R.drawable.master_data,"90 , darkRed"),
+    toggleCardsDescription( "Motion Information", R.drawable.motion_sensor,"60 , darkGreen")
 )

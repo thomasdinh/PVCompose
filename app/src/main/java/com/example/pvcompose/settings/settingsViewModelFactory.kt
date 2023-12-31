@@ -1,9 +1,10 @@
-package com.example.pvcompose
+package com.example.pvcompose.settings
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.pvcompose.screens.settingsViewModel
 
 class SettingsViewModelFactory(
     private val settingsDataStore: DataStore<Preferences>

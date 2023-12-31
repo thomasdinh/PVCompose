@@ -1,4 +1,4 @@
-package com.example.pvcompose
+package com.example.pvcompose.screens
 
 import android.util.Log
 import androidx.compose.foundation.Canvas
@@ -27,7 +27,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-
+import com.example.pvcompose.R
+import com.example.pvcompose.data.BarData
+import com.example.pvcompose.data.barChartdata
+import com.example.pvcompose.data.darkGreen
+import com.example.pvcompose.data.darkRed
+import com.example.pvcompose.data.darkYellow
+import com.example.pvcompose.data.lightGreen
+import com.example.pvcompose.data.orange
 
 
 // Find barChartdata im Example_data.kt
@@ -126,12 +133,12 @@ fun dataCollectedProgressDisplay(){
 
 
     Column {
-        CustomProgressBar( "Video Information",R.drawable.video_camera_icon,50 , Color.Red)
-        CustomProgressBar( "Sound Information",R.drawable.sound_icon,70 , orange)
-        CustomProgressBar( "Biometric Information",R.drawable.biometric_icon,10 , lightGreen)
-        CustomProgressBar( "GPS Information",R.drawable.location_icon,30 , darkYellow)
-        CustomProgressBar( "Online Information",R.drawable.master_data,90 , darkRed)
-        CustomProgressBar( "Motion Information",R.drawable.motion_sensor,60 , darkGreen)
+        CustomProgressBar( "Video Information", R.drawable.video_camera_icon,50 , Color.Red)
+        CustomProgressBar( "Sound Information", R.drawable.sound_icon,70 , orange)
+        CustomProgressBar( "Biometric Information", R.drawable.biometric_icon,10 , lightGreen)
+        CustomProgressBar( "GPS Information", R.drawable.location_icon,30 , darkYellow)
+        CustomProgressBar( "Online Information", R.drawable.master_data,90 , darkRed)
+        CustomProgressBar( "Motion Information", R.drawable.motion_sensor,60 , darkGreen)
     }
 
 

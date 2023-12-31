@@ -1,4 +1,4 @@
-package com.example.pvcompose
+package com.example.pvcompose.settings
 
 // NetworkScanScreen.kt
 
