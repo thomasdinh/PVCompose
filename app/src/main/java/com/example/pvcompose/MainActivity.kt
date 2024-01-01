@@ -1,7 +1,9 @@
 package com.example.pvcompose
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -72,9 +74,7 @@ class MainActivity : ComponentActivity() {
             PVComposeTheme {
 
                 //------------Notification-----------------------------------------------------------
-
-
-
+                val context = this
                 //-----------Navigation-------------------------------------------------------------
                 val navItems = createNavigationItems()
                 Surface(
@@ -82,7 +82,6 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-
 
                 //---------- UI --------------------------------------------------------------------
                     var selectedItemIndex = remember {
@@ -95,6 +94,11 @@ class MainActivity : ComponentActivity() {
                                 NavigationBarItem(
                                     selected = selectedItemIndex.value == index,
                                     onClick = {
+                                        showNotification(
+                                            context = context, // Replace with your activity's context
+                                            title = "Custom Title",
+                                            message = "This is a custom message for the notification."
+                                        )
                                         selectedItemIndex.value = index
                                         navController.navigate(item.route)
                                     },
