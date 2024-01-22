@@ -40,8 +40,8 @@ import com.example.pvcompose.device.DeviceViewModel
 fun ScanScreen(deviceViewModel: DeviceViewModel) {
 
     val deviceList = listOf<Device>(
-        Device(1,"asd","asd","asd","asd"),
-        Device(12,"123asd","a213sd","a22sd","a123sd")
+        Device(1,"Thomas-Galaxy-S21","S21","Samsung","Phone"),
+        Device(2,"Google-NestHub","NestHub","Google","SmartSpeaker")
     )
 
 
