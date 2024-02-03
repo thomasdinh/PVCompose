@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 
-
 object Navigation {
     const val HOME = "home"
     const val SCAN_SCREEN = "scanscreen"
@@ -15,7 +14,7 @@ object Navigation {
     const val DATATYPE_SETTING = "datatype_screen"
     const val TIMING_SETTINGS = "timing_screen"
     const val SOUNDHAPTICS_SETTINGS = "sound_haptic_screen"
+    const val ABOUT_US = "about_us_screen"
 }
-
 
 

@@ -37,12 +37,13 @@ import androidx.navigation.compose.rememberNavController
 import com.example.pvcompose.data.createNavigationItems
 import com.example.pvcompose.device.DeviceViewModel
 import com.example.pvcompose.screens.HomeScreen
+import com.example.pvcompose.screens.NotificationSettingsScreen
 import com.example.pvcompose.screens.ReportScreen
 import com.example.pvcompose.screens.ScanScreen
 import com.example.pvcompose.screens.SettingsScreen
 import com.example.pvcompose.screens.settingsViewModel
 import com.example.pvcompose.settings.DataTypeSettingScreen
-import com.example.pvcompose.settings.NotificationSettingsScreen
+
 import com.example.pvcompose.settings.SettingsViewModelFactory
 import com.example.pvcompose.settings.SoundAndHapticsSettings
 import com.example.pvcompose.settings.SurveyScreen
@@ -139,7 +140,7 @@ class MainActivity : ComponentActivity() {
                                 composable(Navigation.SCAN_SCREEN) { ScanScreen(deviceViewModel = deviceViewModel) }
                                 composable(Navigation.SETTINGS) { SettingsScreen(navController = navController) }
                                 composable(Navigation.SURVEY){ SurveyScreen() }
-                                composable(Navigation.REPORT){ ReportScreen() }
+                                composable(Navigation.REPORT){ ReportScreen(deviceViewModel) }
                                 composable(Navigation.NOTIFICATION_SETTING){ NotificationSettingsScreen(navController = navController) }
                                 composable(Navigation.DATATYPE_SETTING){ DataTypeSettingScreen(settingsViewModel) }
                                 composable(Navigation.SOUNDHAPTICS_SETTINGS){ SoundAndHapticsSettings() }

@@ -1,3 +1,4 @@
+
 package com.example.pvcompose.screens
 
 import android.util.Log
@@ -27,32 +28,44 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.LiveData
 import com.example.pvcompose.R
 import com.example.pvcompose.data.BarData
 import com.example.pvcompose.data.barChartdata
+import com.example.pvcompose.data.colorList
 import com.example.pvcompose.data.darkGreen
 import com.example.pvcompose.data.darkRed
 import com.example.pvcompose.data.darkYellow
 import com.example.pvcompose.data.lightGreen
 import com.example.pvcompose.data.orange
+import com.example.pvcompose.device.Device
+import com.example.pvcompose.device.DeviceViewModel
 
 
 // Find barChartdata im Example_data.kt
 @Composable
-fun ReportScreen() {
+fun ReportScreen(deviceViewModel: DeviceViewModel) {
+
+
     LazyColumn(){
         item { dataCollectedProgressDisplay() }
-        item { stackedBarChart(barChartdata) }
+        item { stackedBarChart(deviceViewModel) }
     }
 }
 
 
 @Composable
-fun stackedBarChart(barChartData: List<BarData>,
+fun stackedBarChart(deviceViewModel: DeviceViewModel,
                     modifier: Modifier = Modifier
                         .fillMaxWidth()
                         .height(120.dp))
 {
+
+
+    var barChartDataUnedited = deviceDataAnalysis(deviceViewModel = deviceViewModel)
+    Log.d("BeforeDataTransform ","Success")
+    var barChartData = transformDataClassToBarData(barChartDataUnedited)
+    Log.d("AfterDataTransform ","Success")
     var maxHeight : Float?= 0f
     if(barChartData.isEmpty()){
         Log.d("Missing Data", "No Data to make a bar Chart")
@@ -201,6 +214,143 @@ fun CustomProgressBar(
 }
 
 
+fun deviceDataAnalysis(deviceViewModel: DeviceViewModel) : List<accumultatedDeviceData> {
+
+    val devices = deviceViewModel.devices.value.orEmpty()
+    val accDeviceDataList = mutableListOf<accumultatedDeviceData>()
+
+
+    var soundInformation = 0
+    var videoInformation = 0
+    var biometricInformation = 0
+    var gpsInformation = 0
+    var onlineInformation = 0
+    var motionInformation = 0
+
+
+
+    for (device in devices) {
+        val existingEntry = accDeviceDataList.find { it.deviceType == device.deviceType }
+        Log.d("devicelistEntry", "$device is selected")
+        if (existingEntry != null) {
+            Log.d("devicelistEntry", "$device found")
+            // Entry already exists, increment values
+            when (device.deviceType) {
+                "Phone" -> {
+                    existingEntry.soundInformation++
+                    existingEntry.videoInformation++
+                    existingEntry.biometricInformation++
+                    existingEntry.gpsInformation++
+                    existingEntry.onlineInformation++
+                    existingEntry.motionInformation++
+                }
+                "Tablet" -> {
+                    // Customize increment logic for Tablet
+                    existingEntry.soundInformation++
+                    existingEntry.onlineInformation++
+                    existingEntry.motionInformation++
+                    existingEntry.videoInformation++
+                }
+                "SmartSpeaker" -> {
+                    existingEntry.soundInformation++
+                    existingEntry.biometricInformation++
+                    existingEntry.motionInformation++
+                    existingEntry.videoInformation++
+                }
+                "SmartWatch" -> {
+                    existingEntry.soundInformation++
+                    existingEntry.biometricInformation++
+                    existingEntry.gpsInformation++
+                    existingEntry.onlineInformation++
+                    existingEntry.motionInformation++
+                    existingEntry.videoInformation++
+                }
+                "SmartWatch" -> {
+                    existingEntry.soundInformation++
+                    existingEntry.biometricInformation++
+                    existingEntry.motionInformation++
+                    existingEntry.videoInformation++
+                }
+                "Unknown" -> {
+                    existingEntry.soundInformation++
+                    existingEntry.biometricInformation++
+                    existingEntry.motionInformation++
+                    existingEntry.videoInformation++
+                }
+                // Add more cases for other device types
+                else -> {
+                    // Handle other device types
+                }
+            }
+        } else {
+            // Entry doesn't exist, add a new entry
+            Log.d("devicelistEntry", "$device not  found")
+
+            var newEntry : accumultatedDeviceData = accumultatedDeviceData(device.deviceType,0,0,0,0,0,0)
+            when (newEntry.deviceType){
+                "Phone" -> {
+                    newEntry = accumultatedDeviceData("Phone",1,1,1,1,1,1,)
+                }
+                "Tablet" -> {
+                    // Customize increment logic for Tablet
+                    newEntry = accumultatedDeviceData("Tablet",1,0,0,1,1,1,)
+                }
+                "SmartSpeaker" -> {
+                    newEntry = accumultatedDeviceData("SmartSpeaker",1,0,0,0,1,1,)
+                }
+                "SmartWatch" -> {
+                    newEntry = accumultatedDeviceData("SmartWatch",1,0,1,0,0,1,)
+                }
+                "Unknown" -> {
+                    newEntry = accumultatedDeviceData("Unknown",1,0,1,0,0,1,)               }
+                // Add more cases for other device types
+                else -> {
+                    // Handle other device types
+                }
+            }
+            // Add the new entry to the list
+            accDeviceDataList += newEntry
+        }
+    }
+
+    Log.d("accDeciceData", "$accDeviceDataList")
+
+    return accDeviceDataList
+}
+
+data class accumultatedDeviceData(
+    val deviceType : String,
+    var soundInformation: Int = 0,
+    var videoInformation: Int = 0,
+    var biometricInformation : Int= 0,
+    var gpsInformation: Int = 0,
+    var onlineInformation : Int = 0,
+    var motionInformation : Int = 0
+){
+
+}
+
 fun createMutableZeroList(size: Int): MutableList<Float?> {
     return MutableList(size) { 0f }
+}
+
+fun transformDataClassToBarData(accumulatedDeviceDataList: List<accumultatedDeviceData>): List<BarData> {
+
+    val barDataList = accumulatedDeviceDataList.map { accumulatedDeviceData ->
+        BarData(
+            label = accumulatedDeviceData.deviceType,
+            barHeights = listOf(
+                accumulatedDeviceData.soundInformation.toFloat(),
+                accumulatedDeviceData.videoInformation.toFloat(),
+                accumulatedDeviceData.biometricInformation.toFloat(),
+                accumulatedDeviceData.gpsInformation.toFloat(),
+                accumulatedDeviceData.onlineInformation.toFloat(),
+                accumulatedDeviceData.motionInformation.toFloat()
+            ),
+            colors = colorList
+        )
+
+    }
+    Log.d("DataTransform", "$barDataList")
+    return barDataList
 }
